@@ -61,9 +61,3 @@ func GetAllComment(ctx context.Context) ([]Comment, error) {
 
 	return comments, nil
 }
-
-func DeleteComment(ctx context.Context, id int64) error {
-	key := datastore.NewKey(ctx, KindComment, "", id, nil)
-	err := datastore.Delete(ctx, key)
-	return errors.WithMessage(err, "DeleteComment")
-}

@@ -1,10 +1,10 @@
 import path from "path"
 
 export default {
-  entry: path.join(__dirname, "../src/front/app.jsx"),
+  entry: path.join(__dirname, "../front/app.jsx"),
   output: {
     publicPath: "/",
-    path: path.join(__dirname, "../app/web"),
+    path: path.join(__dirname, "../../app/web"),
     filename: "bundle.js",
   },
   // when want to export multiple entry
