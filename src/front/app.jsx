@@ -1,29 +1,24 @@
 import React from "react"
-import ReactDOM from "react-dom"
+import { render } from "react-dom"
+import { Provider } from "react-redux"
+import { createStore } from "redux"
+import reducer from "./reducers"
+import AppendableCommentList from "./container/AppendableCommentList"
+import PostCommentBox from "./container/PostCommentBox"
 
-import CommentList from "./components/CommentList"
-import CommentBox from "./components/CommentBox"
+let store = createStore(reducer)
 
-const comments = [
-  {
-    register: "User1",
-    text: "hogehgoe",
-  },
-  {
-    register: "User2",
-    text: "hogehgoe",
-  },
-  {
-    register: "User3",
-    text: "hogehgoe",
-  },
-]
-
-const App = () =>
+const App = () => (
   <div>
     <h1>なんちゃってチャット</h1>
-    <CommentList comments={comments} />
-    <CommentBox />
+    <AppendableCommentList />
+    <PostCommentBox />
   </div>
+)
 
-ReactDOM.render(<App />, document.querySelector("#app"))
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>
+  , document.querySelector("#app")
+)
