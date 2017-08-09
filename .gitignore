@@ -130,3 +130,4 @@ typings/
 activate
 pkg/
 .tern-port
+vendor/
