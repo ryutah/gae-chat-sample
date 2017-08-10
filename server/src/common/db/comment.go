@@ -1,8 +1,7 @@
 package db
 
 import (
-	"log"
-	ustr "server/common/util/strings"
+	ustr "common/util/strings"
 	"time"
 
 	"github.com/pkg/errors"
@@ -60,7 +59,6 @@ func GetAllComment(ctx context.Context) ([]Comment, error) {
 	for i, key := range keys {
 		comments[i].ID = key.IntID()
 	}
-	log.Println("%v", comments)
 
 	return comments, nil
 }

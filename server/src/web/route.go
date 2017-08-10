@@ -1,15 +1,15 @@
 package web
 
 import (
+	chandler "common/handler"
 	"html/template"
 	"net/http"
-	chandler "server/common/handler"
-	"server/web/handler"
+	"web/handler"
 
 	"github.com/gorilla/mux"
 )
 
-func Init() {
+func init() {
 	r := mux.NewRouter()
 
 	r.HandleFunc("/", chandler.DefaultWrapper(index)).Methods("GET")
@@ -20,7 +20,7 @@ func Init() {
 }
 
 func index(w *chandler.RespReqWrapper) {
-	t, err := template.ParseFiles("index.html")
+	t, err := template.ParseFiles("static/index.html")
 	if err != nil {
 		w.ServerError(err)
 		return

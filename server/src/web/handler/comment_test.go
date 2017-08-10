@@ -1,10 +1,10 @@
 package handler
 
 import (
+	"common/db"
+	"common/handler"
+	"common/util/tests"
 	"fmt"
-	"server/common/db"
-	"server/common/handler"
-	"server/common/util/tests"
 	"testing"
 
 	"golang.org/x/net/context"

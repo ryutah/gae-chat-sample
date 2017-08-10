@@ -30,9 +30,5 @@
   version = "0.8.0"
 
 [[constraint]]
-  branch = "master"
-  name = "golang.org/x/net"
-
-[[constraint]]
   name = "google.golang.org/appengine"
   version = "1.0.0"

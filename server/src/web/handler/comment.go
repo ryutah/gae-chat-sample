@@ -1,9 +1,9 @@
 package handler
 
 import (
+	"common/db"
+	"common/handler"
 	"net/http"
-	"server/common/db"
-	"server/common/handler"
 )
 
 type respGetCommentListInner struct {
