@@ -5,6 +5,7 @@ import { createStore } from "redux"
 import reducer from "./reducers"
 import AppendableCommentList from "./container/AppendableCommentList"
 import PostCommentBox from "./container/PostCommentBox"
+import * as commentAction from "./action/comment"
 
 let store = createStore(reducer)
 
@@ -22,3 +23,10 @@ render(
   </Provider>
   , document.querySelector("#app")
 )
+
+setInterval(() => {
+  fetch("/comment")
+    .then((resp) => resp.json())
+    .then((json) => store.dispatch(commentAction.FetchComment(json)))
+    .catch((err) => console.error(err))
+}, 1000)

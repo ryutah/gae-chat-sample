@@ -1,6 +1,7 @@
 package db
 
 import (
+	"log"
 	ustr "server/common/util/strings"
 	"time"
 
@@ -37,20 +38,21 @@ func SaveComment(ctx context.Context, comment *Comment) error {
 
 	key := datastore.NewIncompleteKey(ctx, KindComment, nil)
 
+	now := time.Now()
+	comment.CreatedAt, comment.UpdatedAt = now, now
 	newKey, err := datastore.Put(ctx, key, comment)
 	if err != nil {
 		return errors.WithMessage(err, "SaveComment")
 	}
 
-	now := time.Now()
-	comment.ID, comment.CreatedAt, comment.UpdatedAt = newKey.IntID(), now, now
+	comment.ID = newKey.IntID()
 	return nil
 }
 
 func GetAllComment(ctx context.Context) ([]Comment, error) {
 	var comments []Comment
 
-	keys, err := datastore.NewQuery(KindComment).Limit(1000).GetAll(ctx, &comments)
+	keys, err := datastore.NewQuery(KindComment).Order("-CreatedAt").Limit(1000).GetAll(ctx, &comments)
 	if err != nil {
 		return nil, errors.WithMessage(err, "GetAllComment")
 	}
@@ -58,6 +60,7 @@ func GetAllComment(ctx context.Context) ([]Comment, error) {
 	for i, key := range keys {
 		comments[i].ID = key.IntID()
 	}
+	log.Println("%v", comments)
 
 	return comments, nil
 }

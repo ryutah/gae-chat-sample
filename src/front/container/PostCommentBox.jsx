@@ -6,8 +6,12 @@ const mapStateToProps = (state) => state.comment
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onPostClick: () => {
-      dispatch(OnPostClick)
+    onPostClick: ({ register, text }) => {
+      fetch("/comment", {
+        method: "POST",
+        body: JSON.stringify({ register: register, text: text }),
+      }).then(() => dispatch(OnPostClick))
+        .catch((err) => console.error(err))
     },
     onNameChange: (event) => {
       dispatch(OnNameInputChange(event.target.value))

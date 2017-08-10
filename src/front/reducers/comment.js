@@ -10,13 +10,7 @@ const defaultState = {
 export default (state = defaultState, action) => {
   switch (action.type) {
     case commentAction.TypeOnPostClick: {
-      const newState = Object.assign({}, state)
-      newState.comments.push({
-        register: state.register,
-        text: state.text,
-      })
-      newState.commentsSize = newState.comments.length
-      return newState
+      return state
     }
     case commentAction.TypeOnNameInputChange: {
       const newState = Object.assign({}, state)
@@ -26,6 +20,12 @@ export default (state = defaultState, action) => {
     case commentAction.TypeOnTextInputChange: {
       const newState = Object.assign({}, state)
       newState.text = action.text
+      return newState
+    }
+    case commentAction.TypeFetchComment: {
+      const newState = Object.assign({}, state)
+      newState.comments = action.comments.comments
+      newState.commentsSize = action.comments.comments.length
       return newState
     }
     default: {

@@ -13,7 +13,7 @@ const CommentBox = ({register, text, onPostClick, onNameChange, onTextChange}) =
       value={text}
       onChange={onTextChange}
     />
-    <button onClick={onPostClick}>送信</button>
+    <button onClick={() => onPostClick({ register: register, text: text })}>送信</button>
   </div>
 )
 

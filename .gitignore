@@ -131,3 +131,4 @@ activate
 pkg/
 .tern-port
 vendor/
+bundle.js
