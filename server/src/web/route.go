@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"web/handler"
 
+	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 )
 
@@ -16,7 +17,13 @@ func init() {
 	r.HandleFunc("/comment", chandler.DefaultWrapper(handler.GetCommentList)).Methods("GET")
 	r.HandleFunc("/comment", chandler.DefaultWrapper(handler.PostComment)).Methods("POST")
 
-	http.Handle("/", r)
+	cors := handlers.CORS(
+		handlers.AllowedHeaders([]string{"Content-Type"}),
+		handlers.AllowedOrigins([]string{"http://localhost:8081"}),
+		handlers.AllowedMethods([]string{"GET", "PUT", "DELETE", "POST"}),
+	)(r)
+
+	http.Handle("/", cors)
 }
 
 func index(w *chandler.RespReqWrapper) {

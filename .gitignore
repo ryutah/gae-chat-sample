@@ -132,3 +132,4 @@ pkg/
 .tern-port
 vendor/
 bundle.js
+.envrc

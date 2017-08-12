@@ -19,6 +19,10 @@ func (w RespReqWrapper) ParseJSON(v interface{}) error {
 }
 
 func (w RespReqWrapper) JSON(code int, v interface{}) {
+	for k, v := range w.R.Header {
+		log.Infof(w.Context, "%v : %v", k, v)
+	}
+	w.W.Header().Set("Content-Type", "application/json")
 	w.W.WriteHeader(code)
 	if err := json.NewEncoder(w.W).Encode(v); err != nil {
 		w.ServerError(err)
